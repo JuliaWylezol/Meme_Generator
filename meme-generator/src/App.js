@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 // import randomColor from "randomcolor";
 import Image from "./components/Image/Image";
-
-// const InputWrapper = styled.div`
-//   background-color: blue;
-// `;
+import Heading from "./components/Heading/Heading";
 
 function App() {
   const [topText, setTopText] = useState("");
@@ -13,9 +10,6 @@ function App() {
   const [color, setColor] = useState("black");
   const [memes, setMemes] = useState([]);
   const [url, setUrl] = useState("");
-  const theme = {
-    color: color,
-  };
 
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
@@ -46,9 +40,8 @@ function App() {
         name={"bottomText"}
       />
       <Image url={url} />
-      <h1 style={theme}>
-        Top text will be: {topText} and bottom text: {bottomText}
-      </h1>
+      <Heading text={topText} />
+      <Heading text={bottomText} />
       <button onClick={handleClick}>Change color</button>
     </>
   );
