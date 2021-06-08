@@ -7,10 +7,13 @@ const HeadingWrapper = styled.div`
   cursor: move;
 `;
 
-function Heading({ text }) {
+function Heading({ text, size }) {
+  const theme = {
+    fontSize: `${size}px`,
+  };
   return (
     <HeadingWrapper>
-      <h1>{text}</h1>
+      <h1 style={theme}>{text}</h1>
     </HeadingWrapper>
   );
 }

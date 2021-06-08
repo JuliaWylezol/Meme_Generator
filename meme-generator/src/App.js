@@ -7,6 +7,8 @@ import Heading from "./components/Heading/Heading";
 function App() {
   const [topText, setTopText] = useState("");
   const [bottomText, setBottomText] = useState("");
+  const [topTextSize, setTopTextSize] = useState(22);
+  const [bottomTextSize, setBottomTextSize] = useState(22);
   const [color, setColor] = useState("black");
   const [memes, setMemes] = useState([]);
   const [url, setUrl] = useState("");
@@ -33,15 +35,29 @@ function App() {
         name={"topText"}
       />
       <input
+        type="number"
+        onChange={(e) => setTopTextSize(e.target.value)}
+        value={topTextSize}
+        placeholder={"Top Text Size"}
+        name={"topTextSize"}
+      />
+      <input
         type="text"
         onChange={(e) => setBottomText(e.target.value)}
         value={bottomText}
         placeholder={"Bottom Text"}
         name={"bottomText"}
       />
+      <input
+        type="number"
+        onChange={(e) => setBottomTextSize(e.target.value)}
+        value={bottomTextSize}
+        placeholder={"Bottom Text Size"}
+        name={"bottomTextSize"}
+      />
       <Image url={url} />
-      <Heading text={topText} />
-      <Heading text={bottomText} />
+      <Heading text={topText} size={topTextSize} />
+      <Heading text={bottomText} size={bottomTextSize} />
       <button onClick={handleClick}>Change color</button>
     </>
   );
