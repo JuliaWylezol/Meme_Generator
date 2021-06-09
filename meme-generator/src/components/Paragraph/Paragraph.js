@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
-const HeadingWrapper = styled.div`
+const ParagraphWrapper = styled.div`
   background-color: blue;
   width: fit-content;
   cursor: move;
 `;
 
-function Heading({ text, size }) {
+function Paragraph({ text, size }) {
   const optionalStyles = {
     fontSize: `${size}px`,
   };
   return (
-    <HeadingWrapper>
+    <ParagraphWrapper>
       <h1 style={optionalStyles}>{text}</h1>
-    </HeadingWrapper>
+    </ParagraphWrapper>
   );
 }
 
-export default Heading;
+export default Paragraph;
