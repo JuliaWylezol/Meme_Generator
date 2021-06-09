@@ -8,12 +8,12 @@ const HeadingWrapper = styled.div`
 `;
 
 function Heading({ text, size }) {
-  const theme = {
+  const optionalStyles = {
     fontSize: `${size}px`,
   };
   return (
     <HeadingWrapper>
-      <h1 style={theme}>{text}</h1>
+      <h1 style={optionalStyles}>{text}</h1>
     </HeadingWrapper>
   );
 }
