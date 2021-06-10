@@ -9,9 +9,10 @@ const StyledBtn = styled.button`
   border: none;
   border-radius: 5px;
   padding: 10px;
+  margin-bottom: 10px;
 
-  ${({ gen }) =>
-    gen &&
+  ${({ generate }) =>
+    generate &&
     css`
       font-size: 22px;
       width: 200px;
@@ -22,9 +23,9 @@ const StyledBtn = styled.button`
     `}
 `;
 
-function Button({ btnText, handleClick, gen }) {
+function Button({ btnText, handleClick, generate }) {
   return (
-    <StyledBtn gen={gen} onClick={handleClick}>
+    <StyledBtn generate={generate} onClick={handleClick}>
       {btnText}
     </StyledBtn>
   );

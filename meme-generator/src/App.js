@@ -26,12 +26,19 @@ const InputWrapper = styled.div`
   flex-direction: column;
 `;
 
+const ButtonsWrapper = styled.div`
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+`;
+
 function App() {
   const [topText, setTopText] = useState("");
   const [bottomText, setBottomText] = useState("");
   const [topTextSize, setTopTextSize] = useState(22);
   const [bottomTextSize, setBottomTextSize] = useState(22);
   const [color, setColor] = useState("black");
+  const [isFontBlack, setIsFontBlack] = useState(true);
   const [fontWeight, setFontWeight] = useState(400);
   const [isFontBold, setIsFontBold] = useState(false);
   const [memes, setMemes] = useState([]);
@@ -62,6 +69,16 @@ function App() {
     }
   };
 
+  const changeFontColor = () => {
+    if (!isFontBlack) {
+      setColor("black");
+      setIsFontBlack(true);
+    } else {
+      setColor("white");
+      setIsFontBlack(false);
+    }
+  };
+
   return (
     <>
       <Heading> Meme Generator</Heading>
@@ -81,10 +98,6 @@ function App() {
             placeholder={"Top Text Size"}
             name={"topTextSize"}
           />
-          <Button
-            btnText={"Change Color"}
-            handleClick={() => setColor(randomColor())}
-          />
         </InputWrapper>
         <InputWrapper>
           <Input
@@ -101,29 +114,39 @@ function App() {
             placeholder={"Bottom Text Size"}
             name={"bottomTextSize"}
           />
+        </InputWrapper>
+        <ButtonsWrapper>
+          <Button
+            btnText={"Random font color"}
+            handleClick={() => setColor(randomColor())}
+          />
           <Button
             btnText={`Change font to ${isFontBold ? "thick" : "bold"}`}
             handleClick={() => changeFontWeight()}
           />
-        </InputWrapper>
+          <Button
+            btnText={`Change font to ${isFontBlack ? "white" : "black"}`}
+            handleClick={() => changeFontColor()}
+          />
+        </ButtonsWrapper>
         <Image url={url} />
-        <Paragraph
-          text={topText}
-          size={topTextSize}
-          color={color}
-          fontWeight={fontWeight}
-        />
-        <Paragraph
-          text={bottomText}
-          size={bottomTextSize}
-          color={color}
-          fontWeight={fontWeight}
-        />
       </CreateMemeWrapper>
+      <Paragraph
+        text={topText}
+        size={topTextSize}
+        color={color}
+        fontWeight={fontWeight}
+      />
+      <Paragraph
+        text={bottomText}
+        size={bottomTextSize}
+        color={color}
+        fontWeight={fontWeight}
+      />
       <Button
         handleClick={genereteMeme}
         btnText={"Generate random meme"}
-        gen
+        generate
       ></Button>
     </>
   );
