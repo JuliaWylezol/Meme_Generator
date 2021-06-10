@@ -4,26 +4,13 @@ import randomColor from "randomcolor";
 import Image from "./components/Image/Image";
 import Paragraph from "./components/Paragraph/Paragraph";
 import Input from "./components/Input/Input";
+import Button from "./components/Button/Button";
 
 const Heading = styled.h1`
   color: #331b3f;
   font-size: 40px;
   font-weight: 600;
   text-align: center;
-`;
-
-const Button = styled.button`
-  background-color: #331b3f;
-  color: #acc7b4;
-  font-size: 22px;
-  text-align: center;
-  border: none;
-  width: 200px;
-  height: 100px;
-  border-radius: 5px;
-  position: absolute;
-  bottom: 5px;
-  left: 40%;
 `;
 
 const CreateMemeWrapper = styled.div`
@@ -60,7 +47,7 @@ function App() {
       });
   }, []);
 
-  const handleClick = () => {
+  const genereteMeme = () => {
     const newUrl = memes[Math.floor(Math.random() * memes.length)].url;
     setUrl(newUrl);
   };
@@ -129,7 +116,11 @@ function App() {
           fontWeight={fontWeight}
         />
       </CreateMemeWrapper>
-      <Button onClick={handleClick}>Generate random meme</Button>
+      <Button
+        handleClick={genereteMeme}
+        btnText={"Generate random meme"}
+        generate
+      ></Button>
     </>
   );
 }
