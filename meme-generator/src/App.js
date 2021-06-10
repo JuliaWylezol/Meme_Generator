@@ -81,7 +81,10 @@ function App() {
             placeholder={"Top Text Size"}
             name={"topTextSize"}
           />
-          <button onClick={() => setColor(randomColor())}>Change Color</button>
+          <Button
+            btnText={"Change Color"}
+            handleClick={() => setColor(randomColor())}
+          />
         </InputWrapper>
         <InputWrapper>
           <Input
@@ -98,9 +101,10 @@ function App() {
             placeholder={"Bottom Text Size"}
             name={"bottomTextSize"}
           />
-          <button onClick={() => changeFontWeight()}>
-            Change font to {isFontBold ? "thick" : "bold"}
-          </button>
+          <Button
+            btnText={`Change font to ${isFontBold ? "thick" : "bold"}`}
+            handleClick={() => changeFontWeight()}
+          />
         </InputWrapper>
         <Image url={url} />
         <Paragraph
@@ -119,7 +123,7 @@ function App() {
       <Button
         handleClick={genereteMeme}
         btnText={"Generate random meme"}
-        generate
+        gen
       ></Button>
     </>
   );

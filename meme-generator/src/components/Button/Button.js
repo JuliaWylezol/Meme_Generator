@@ -4,19 +4,30 @@ import styled, { css } from "styled-components";
 const StyledBtn = styled.button`
   background-color: #331b3f;
   color: #acc7b4;
-  font-size: 22px;
+  font-size: 18px;
   text-align: center;
   border: none;
-  width: 200px;
-  height: 100px;
   border-radius: 5px;
-  position: absolute;
-  bottom: 5px;
-  left: 40%;
+  padding: 10px;
+
+  ${({ gen }) =>
+    gen &&
+    css`
+      font-size: 22px;
+      width: 200px;
+      height: 100px;
+      position: absolute;
+      bottom: 5px;
+      left: 40%;
+    `}
 `;
 
-function Button({ btnText, handleClick }) {
-  return <StyledBtn onClick={handleClick}>{btnText}</StyledBtn>;
+function Button({ btnText, handleClick, gen }) {
+  return (
+    <StyledBtn gen={gen} onClick={handleClick}>
+      {btnText}
+    </StyledBtn>
+  );
 }
 
 export default Button;
