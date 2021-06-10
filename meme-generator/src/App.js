@@ -82,6 +82,7 @@ function App() {
   return (
     <>
       <Heading> Meme Generator</Heading>
+      <h2>Customize your text and drag it to the meme</h2>
       <CreateMemeWrapper>
         <InputWrapper>
           <Input

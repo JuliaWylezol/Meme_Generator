@@ -14,7 +14,7 @@ const labelStyle = {
 
 const inputStyle = {
   fontSize: "18px",
-  height: "30px",
+  height: "40px",
   marginBottom: "10px",
 };
 
