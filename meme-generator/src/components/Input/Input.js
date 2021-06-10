@@ -2,19 +2,33 @@ import React from "react";
 import styled from "styled-components";
 
 const InputWrapper = styled.div`
-  display: block;
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
 `;
+
+const labelStyle = {
+  fontSize: "22px",
+  marginBottom: "10px",
+};
+
+const inputStyle = {
+  fontSize: "18px",
+  height: "30px",
+  marginBottom: "10px",
+};
 
 function Input({ type, placeholder, handleChange, value, name }) {
   return (
     <InputWrapper>
-      <label>{placeholder}: </label>
+      <label style={labelStyle}>{placeholder}: </label>
       <input
         type={type}
         placeholder={placeholder}
         onChange={handleChange}
         value={value}
         name={name}
+        style={inputStyle}
       />
     </InputWrapper>
   );

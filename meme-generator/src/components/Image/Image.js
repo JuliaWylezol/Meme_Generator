@@ -1,8 +1,8 @@
 import React from "react";
 
 const imageStyle = {
-  maxWidth: "600px",
-  maxHeight: "500px",
+  maxWidth: "500px",
+  maxHeight: "460px",
 };
 
 function Image({ url }) {

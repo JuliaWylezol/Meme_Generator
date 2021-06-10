@@ -1,12 +1,42 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-// import randomColor from "randomcolor";
+import randomColor from "randomcolor";
 import Image from "./components/Image/Image";
 import Paragraph from "./components/Paragraph/Paragraph";
 import Input from "./components/Input/Input";
 
 const Heading = styled.h1`
-  background-color: pink;
+  color: #331b3f;
+  font-size: 40px;
+  font-weight: 600;
+  text-align: center;
+`;
+
+const Button = styled.button`
+  background-color: #331b3f;
+  color: #acc7b4;
+  font-size: 22px;
+  text-align: center;
+  border: none;
+  width: 200px;
+  height: 100px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 5px;
+  left: 40%;
+`;
+
+const CreateMemeWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+`;
+const InputWrapper = styled.div`
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
 `;
 
 function App() {
@@ -15,8 +45,12 @@ function App() {
   const [topTextSize, setTopTextSize] = useState(22);
   const [bottomTextSize, setBottomTextSize] = useState(22);
   const [color, setColor] = useState("black");
+  const [fontWeight, setFontWeight] = useState(400);
+  const [isFontBold, setIsFontBold] = useState(false);
   const [memes, setMemes] = useState([]);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState(
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLpjAPDGxAIt9kJ7RIYM9l0QdEDW783EV0e_7W5Wow0w5DBRZm6crKPqFcQw7FivxvpRc&usqp=CAU"
+  );
 
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
@@ -31,41 +65,71 @@ function App() {
     setUrl(newUrl);
   };
 
+  const changeFontWeight = () => {
+    if (!isFontBold) {
+      setFontWeight(600);
+      setIsFontBold(true);
+    } else {
+      setFontWeight(400);
+      setIsFontBold(false);
+    }
+  };
+
   return (
     <>
       <Heading> Meme Generator</Heading>
-      <Input
-        type={"text"}
-        handleChange={(e) => setTopText(e.target.value)}
-        value={topText}
-        placeholder={"Top Text"}
-        name={"Top Text"}
-      />
-      <Input
-        type={"number"}
-        handleChange={(e) => setTopTextSize(e.target.value)}
-        value={topTextSize}
-        placeholder={"Top Text Size"}
-        name={"topTextSize"}
-      />
-      <Input
-        type={"text"}
-        handleChange={(e) => setBottomText(e.target.value)}
-        value={bottomText}
-        placeholder={"Bottom Text"}
-        name={"bottomText"}
-      />
-      <Input
-        type={"number"}
-        handleChange={(e) => setBottomTextSize(e.target.value)}
-        value={bottomTextSize}
-        placeholder={"Bottom Text Size"}
-        name={"bottomTextSize"}
-      />
-      <Image url={url} />
-      <Paragraph text={topText} size={topTextSize} />
-      <Paragraph text={bottomText} size={bottomTextSize} />
-      <button onClick={handleClick}>Generate random meme</button>
+      <CreateMemeWrapper>
+        <InputWrapper>
+          <Input
+            type={"text"}
+            handleChange={(e) => setTopText(e.target.value)}
+            value={topText}
+            placeholder={"Top Text"}
+            name={"Top Text"}
+          />
+          <Input
+            type={"number"}
+            handleChange={(e) => setTopTextSize(e.target.value)}
+            value={topTextSize}
+            placeholder={"Top Text Size"}
+            name={"topTextSize"}
+          />
+          <button onClick={() => setColor(randomColor())}>Change Color</button>
+        </InputWrapper>
+        <InputWrapper>
+          <Input
+            type={"text"}
+            handleChange={(e) => setBottomText(e.target.value)}
+            value={bottomText}
+            placeholder={"Bottom Text"}
+            name={"bottomText"}
+          />
+          <Input
+            type={"number"}
+            handleChange={(e) => setBottomTextSize(e.target.value)}
+            value={bottomTextSize}
+            placeholder={"Bottom Text Size"}
+            name={"bottomTextSize"}
+          />
+          <button onClick={() => changeFontWeight()}>
+            Change font to {isFontBold ? "thick" : "bold"}
+          </button>
+        </InputWrapper>
+        <Image url={url} />
+        <Paragraph
+          text={topText}
+          size={topTextSize}
+          color={color}
+          fontWeight={fontWeight}
+        />
+        <Paragraph
+          text={bottomText}
+          size={bottomTextSize}
+          color={color}
+          fontWeight={fontWeight}
+        />
+      </CreateMemeWrapper>
+      <Button onClick={handleClick}>Generate random meme</Button>
     </>
   );
 }
