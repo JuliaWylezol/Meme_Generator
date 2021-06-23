@@ -41,16 +41,8 @@ function Paragraph({ text, size, color, fontWeight }) {
     }
   };
 
-  const mouseUpEvent = () => {
-    console.log("mouse up");
-  };
-
   return (
-    <ParagraphWrapper
-      ref={paragraphRef}
-      onMouseDown={(e) => mouseDownEvent(e)}
-      onMouseUp={mouseUpEvent}
-    >
+    <ParagraphWrapper ref={paragraphRef} onMouseDown={(e) => mouseDownEvent(e)}>
       <p style={optionalStyles}>{text}</p>
     </ParagraphWrapper>
   );

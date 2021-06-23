@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import randomColor from "randomcolor";
-import Image from "./components/Image/Image";
+// import Image from "./components/Image/Image";
 import Paragraph from "./components/Paragraph/Paragraph";
 import Input from "./components/Input/Input";
 import Button from "./components/Button/Button";
@@ -32,6 +32,11 @@ const ButtonsWrapper = styled.div`
   flex-direction: column;
 `;
 
+const Subtitle = styled.h2`
+  text-align: center;
+  color: #331b3f;
+`;
+
 function App() {
   const [topText, setTopText] = useState("");
   const [bottomText, setBottomText] = useState("");
@@ -42,9 +47,8 @@ function App() {
   const [fontWeight, setFontWeight] = useState(400);
   const [isFontBold, setIsFontBold] = useState(false);
   const [memes, setMemes] = useState([]);
-  const [url, setUrl] = useState(
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLpjAPDGxAIt9kJ7RIYM9l0QdEDW783EV0e_7W5Wow0w5DBRZm6crKPqFcQw7FivxvpRc&usqp=CAU"
-  );
+
+  const canvas = useRef(null);
 
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
@@ -56,7 +60,13 @@ function App() {
 
   const genereteMeme = () => {
     const newUrl = memes[Math.floor(Math.random() * memes.length)].url;
-    setUrl(newUrl);
+    const baseImage = new Image();
+    baseImage.src = newUrl;
+
+    baseImage.onload = function () {
+      const ctx = canvas.current.getContext("2d");
+      ctx.drawImage(baseImage, 0, 0, 400, 400);
+    };
   };
 
   const changeFontWeight = () => {
@@ -82,7 +92,7 @@ function App() {
   return (
     <>
       <Heading> Meme Generator</Heading>
-      <h2>Customize your text and drag it to the meme</h2>
+      <Subtitle>Customize your text and drag it to the meme</Subtitle>
       <CreateMemeWrapper>
         <InputWrapper>
           <Input
@@ -130,7 +140,9 @@ function App() {
             handleClick={() => changeFontColor()}
           />
         </ButtonsWrapper>
-        <Image url={url} />
+        <div>
+          <canvas ref={canvas} width={400} height={400}></canvas>
+        </div>
       </CreateMemeWrapper>
       <Paragraph
         text={topText}

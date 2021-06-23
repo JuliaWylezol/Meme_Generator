@@ -10,6 +10,7 @@ const StyledBtn = styled.button`
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
+  cursor: pointer;
 
   ${({ generate }) =>
     generate &&
