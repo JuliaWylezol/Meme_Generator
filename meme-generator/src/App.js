@@ -66,6 +66,7 @@ function App() {
   const [bottomX, setBottomX] = useState("50%");
   const [bottomY, setBottomY] = useState("80%");
   const [saveName, setSaveName] = useState("");
+  const [isMemeGenerated, setIsMemeGenerated] = useState(false);
 
   const imgRef = useRef(null);
   const svgRef = useRef(null);
@@ -82,6 +83,7 @@ function App() {
     const index = Math.floor(Math.random() * memes.length);
     const newUrl = memes[index].url;
     setUrl(newUrl);
+    setIsMemeGenerated(true);
   };
 
   const changeFontWeight = () => {
@@ -188,7 +190,9 @@ function App() {
               {bottomText}
             </text>
           </svg>
-          <Button handleClick={saveMeme} btnText={"Download meme"}></Button>
+          {isMemeGenerated && (
+            <Button handleClick={saveMeme} btnText={"Download meme"} />
+          )}
         </MemeWrapper>
         <Line />
         <ButtonsWrapper>

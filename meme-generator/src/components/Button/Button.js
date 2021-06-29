@@ -17,6 +17,7 @@ const StyledBtn = styled.button`
   text-transform: uppercase;
   left: 0;
   top: 0;
+  cursor: pointer;
 
   ${({ generate }) =>
     generate &&
