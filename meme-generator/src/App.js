@@ -55,8 +55,8 @@ function App() {
   const [bottomText, setBottomText] = useState("");
   const [topTextSize, setTopTextSize] = useState(22);
   const [bottomTextSize, setBottomTextSize] = useState(22);
-  const [color, setColor] = useState("black");
-  const [isFontBlack, setIsFontBlack] = useState(true);
+  const [color, setColor] = useState("white");
+  const [isFontBlack, setIsFontBlack] = useState(false);
   const [fontWeight, setFontWeight] = useState(400);
   const [isFontBold, setIsFontBold] = useState(false);
   const [memes, setMemes] = useState([]);
@@ -106,9 +106,9 @@ function App() {
 
   const changeFontSize = (isIncreasing, type) => {
     if (type === "top") {
-      setTopTextSize(isIncreasing ? topTextSize + 1 : topTextSize - 1);
+      setTopTextSize(isIncreasing ? topTextSize + 2 : topTextSize - 2);
     } else {
-      setBottomTextSize(isIncreasing ? bottomTextSize + 1 : bottomTextSize - 1);
+      setBottomTextSize(isIncreasing ? bottomTextSize + 2 : bottomTextSize - 2);
     }
   };
 
@@ -139,6 +139,12 @@ function App() {
     saveName.length > 0
       ? svg.saveSvgAsPng(document.getElementById("svg_ref"), `${saveName}.png`)
       : svg.saveSvgAsPng(document.getElementById("svg_ref"), "meme.png");
+  };
+
+  const resetInputs = () => {
+    setTopText("");
+    setBottomText("");
+    setSaveName("");
   };
 
   return (
@@ -233,13 +239,11 @@ function App() {
               name={"saveMeme"}
             />
           </InputWrapper>
+          <Button handleClick={resetInputs} btnText={"Reset"} />
         </ButtonsWrapper>
 
         <ButtonsWrapper>
-          <Button
-            handleClick={genereteMeme}
-            btnText={"Generate random meme"}
-          ></Button>
+          <Button handleClick={genereteMeme} btnText={"Generate random meme"} />
           <Button
             btnText={"Random font color"}
             handleClick={() => setColor(randomColor())}
