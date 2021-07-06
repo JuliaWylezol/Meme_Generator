@@ -17,11 +17,15 @@ const Heading = styled.h1`
 `;
 
 const CreateMemeWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 32% 3% 65%;
+  @media (max-width: 1400px) {
+    margin-top: 40px;
+    grid-template-columns: 47% 3% 50%;
+  }
+  @media (max-width: 1000px) {
+    grid-template-columns: 100%;
+  }
 `;
 
 const MemeWrapper = styled.div`
@@ -34,20 +38,74 @@ const InputWrapper = styled.div`
   height: fit-content;
   flex-direction: row;
   justify-content: space-between;
-  width: 500px;
+  width: 100%;
+  @media (max-width: 500px) {
+    width: 80%;
+    align-self: center;
+  }
+  @media (max-width: 400px) {
+    width: 70%;
+  }
 `;
 
 const ButtonsWrapper = styled.div`
+  display: grid;
+  height: fit-content;
+  grid-template-columns: 100%;
+  margin: auto 30px;
+
+  @media (max-width: 1410px) {
+    grid-template-columns: repeat(2, 250px);
+    column-gap: 15px;
+  }
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, 220px);
+    align-items: center;
+    margin-top: 0px;
+  }
+  @media (max-width: 1000px) {
+    column-gap: 50px;
+  }
+  @media (max-width: 570px) {
+    column-gap: 0px;
+  }
+`;
+
+const InputsWrapper = styled.div`
   display: flex;
   height: fit-content;
   flex-direction: column;
+  width: 500px;
+  margin: auto 30px;
+  @media (max-width: 1100px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const Line = styled.div`
-  height: 550px;
-  width: 4px;
+  padding: 270px 4px;
   background-color: #344289;
   border-radius: 5px;
+  margin: auto 40px;
+  @media (max-width: 1100px) {
+    padding: 390px 4px;
+  }
+  @media (max-width: 1000px) {
+    padding: 4px;
+    width: 88%;
+    margin: 40px;
+  }
+`;
+
+const AdjustWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  @media (max-width: 1410px) {
+    flex-direction: column;
+  }
+  @media (max-width: 1000px) {
+    align-items: center;
+  }
 `;
 
 function App() {
@@ -131,7 +189,7 @@ function App() {
         setBottomY(`${yOffset}px`);
       }
     }
-    function mouseUp(e) {
+    function mouseUp() {
       window.removeEventListener("mousemove", mouseMove);
       window.removeEventListener("mouseup", mouseUp);
     }
@@ -195,72 +253,81 @@ function App() {
           )}
         </MemeWrapper>
         <Line />
-        <ButtonsWrapper>
-          <InputWrapper>
-            <Input
-              type={"text"}
-              handleChange={(e) => setTopText(e.target.value)}
-              value={topText}
-              placeholder={"Top Text"}
-              name={"Top Text"}
-            />
-            <Button
-              btnText={"+"}
-              handleClick={() => changeFontSize(true, "top")}
-              fontSize
-            />
-            <Button
-              btnText={"-"}
-              handleClick={() => changeFontSize(false, "top")}
-              fontSize
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <Input
-              type={"text"}
-              handleChange={(e) => setBottomText(e.target.value)}
-              value={bottomText}
-              placeholder={"Bottom Text"}
-              name={"bottomText"}
-            />
-            <Button
-              btnText={"+"}
-              handleClick={() => changeFontSize(true, "bottom")}
-              fontSize
-            />
-            <Button
-              btnText={"-"}
-              handleClick={() => changeFontSize(false, "bottom")}
-              fontSize
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <Input
-              type={"text"}
-              handleChange={(e) => setSaveName(e.target.value)}
-              value={saveName}
-              placeholder={"Save meme as..."}
-              name={"saveMeme"}
-            />
-          </InputWrapper>
-          <Button handleClick={resetInputs} btnText={"Reset"} />
-        </ButtonsWrapper>
+        <AdjustWrapper>
+          <InputsWrapper>
+            <InputWrapper>
+              <Input
+                type={"text"}
+                handleChange={(e) => setTopText(e.target.value)}
+                value={topText}
+                placeholder={"Top Text"}
+                name={"Top Text"}
+              />
+              <Button
+                btnText={"+"}
+                handleClick={() => changeFontSize(true, "top")}
+                fontSize
+              />
+              <Button
+                btnText={"-"}
+                handleClick={() => changeFontSize(false, "top")}
+                fontSize
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Input
+                type={"text"}
+                handleChange={(e) => setBottomText(e.target.value)}
+                value={bottomText}
+                placeholder={"Bottom Text"}
+                name={"bottomText"}
+              />
+              <Button
+                btnText={"+"}
+                handleClick={() => changeFontSize(true, "bottom")}
+                fontSize
+              />
+              <Button
+                btnText={"-"}
+                handleClick={() => changeFontSize(false, "bottom")}
+                fontSize
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Input
+                type={"text"}
+                handleChange={(e) => setSaveName(e.target.value)}
+                value={saveName}
+                placeholder={"Save meme as..."}
+                name={"saveMeme"}
+              />
+            </InputWrapper>
+            <Button handleClick={resetInputs} btnText={"Reset"} />
+          </InputsWrapper>
 
-        <ButtonsWrapper>
-          <Button handleClick={genereteMeme} btnText={"Generate random meme"} />
-          <Button
-            btnText={"Random font color"}
-            handleClick={() => setColor(randomColor())}
-          />
-          <Button
-            btnText={`Change font to ${isFontBold ? "thick" : "bold"}`}
-            handleClick={() => changeFontWeight()}
-          />
-          <Button
-            btnText={`Change font to ${isFontBlack ? "white" : "black"}`}
-            handleClick={() => changeFontColor()}
-          />
-        </ButtonsWrapper>
+          <ButtonsWrapper>
+            <Button
+              handleClick={genereteMeme}
+              btnText={"Generate random meme"}
+              adjust
+            />
+            <Button
+              btnText={"Random font color"}
+              handleClick={() => setColor(randomColor())}
+              adjust
+            />
+            <Button
+              btnText={`Change font to ${isFontBold ? "thick" : "bold"}`}
+              handleClick={() => changeFontWeight()}
+              adjust
+            />
+            <Button
+              btnText={`Change font to ${isFontBlack ? "white" : "black"}`}
+              handleClick={() => changeFontColor()}
+              adjust
+            />
+          </ButtonsWrapper>
+        </AdjustWrapper>
       </CreateMemeWrapper>
     </>
   );

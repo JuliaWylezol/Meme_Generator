@@ -2,8 +2,8 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const StyledBtn = styled.button`
-  width: 60%;
-  margin: 10px;
+  width: 100%;
+  margin: 15px auto;
   position: relative;
   background: #0a174e;
   border: 1px solid black;
@@ -18,16 +18,21 @@ const StyledBtn = styled.button`
   left: 0;
   top: 0;
   cursor: pointer;
+  @media (max-width: 1000px) {
+    width: 250px;
+  }
+  @media (max-width: 570px) {
+    width: 180px;
+  }
 
-  ${({ generate }) =>
-    generate &&
+  ${({ adjust }) =>
+    adjust &&
     css`
-      font-size: 22px;
-      width: 200px;
-      height: 100px;
-      position: absolute;
-      bottom: 5px;
-      left: 40%;
+      margin-right: 5px;
+      @media (max-width: 1400px) {
+        /* margin-left: 25px; */
+        /* margin-right: 25px; */
+      }
     `}
 
   ${({ fontSize }) =>
@@ -38,12 +43,19 @@ const StyledBtn = styled.button`
       width: 70px;
       margin-top: 0px;
       margin-bottom: 30px;
+      @media (max-width: 1000px) {
+        width: 70px;
+      }
+      @media (max-width: 400px) {
+        margin-left: 15px;
+        margin-right: 15px;
+      }
     `}
 `;
 
-function Button({ btnText, handleClick, generate, fontSize }) {
+function Button({ btnText, handleClick, adjust, fontSize }) {
   return (
-    <StyledBtn generate={generate} fontSize={fontSize} onClick={handleClick}>
+    <StyledBtn adjust={adjust} fontSize={fontSize} onClick={handleClick}>
       {btnText}
     </StyledBtn>
   );
