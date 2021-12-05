@@ -1,5 +1,9 @@
 Meme Generator is a perfect app to create your own meme!
 
+# How to run project?
+
+To easily run project you can visit via vercel: https://meme-generator-plum.vercel.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
